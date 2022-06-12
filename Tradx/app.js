@@ -13,11 +13,15 @@ require("dotenv").config();
 const app = express();
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
+
+const port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 app.set("port", 3000);
 
@@ -90,6 +94,18 @@ app.get("/Dashboard", async (req, res) => {
   } else {
     res.redirect("/login");
   }
+});
+
+app.get("/about_us", (req, res) => {
+  res.render("About_us", { status: userContent.status });
+});
+
+app.get("/instructions", (req, res) => {
+  res.render("instructions", { status: userContent.status });
+});
+
+app.get("/contact_us", (req, res) => {
+  res.render("contact_us", { status: userContent.status });
 });
 
 app.get("/stock/:stockID", async (req, res) => {
@@ -205,6 +221,7 @@ app
         console.error(error);
       });
   });
+
 // route for user logout
 app.get("/logout", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
@@ -458,12 +475,6 @@ app.listen(app.get("port"), async () => {
       3005,
       1641357000000,
       "Ye hai melody 5 Jan",
-      randText
-    );
-    await dbFunct.storeEvent(
-      3006,
-      1654057800000,
-      "Ye hai melody 1 June",
       randText
     );
   }

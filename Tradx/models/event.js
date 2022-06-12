@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     /**
@@ -13,35 +11,39 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Event.init({
-    eventID:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
-      primaryKey:true,
-      unique:true,
-        validate:{
-          notNull:{msg:'Ebent must have a ID'},
-          notEmpty:{msg:'ID must not be empty'}
-        }
-    },
-      timeStamp:{
-        type:DataTypes.STRING
+  Event.init(
+    {
+      eventID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        unique: true,
+        validate: {
+          notNull: { msg: "Ebent must have a ID" },
+          notEmpty: { msg: "ID must not be empty" },
+        },
+      },
+      timeStamp: {
+        type: DataTypes.STRING,
       },
 
-      heading:{
-        type:DataTypes.STRING
+      heading: {
+        type: DataTypes.STRING,
       },
-      description:{
-        type:DataTypes.TEXT,
-        allowNull:false,
-        primaryKey:false,
-        validate:{
-          notNull:{msg:'Description must have a value'},
-          notEmpty:{msg:'Description must not be empty'}
-        }}
-  }, {
-    sequelize,
-    modelName: 'Event',
-  });
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        primaryKey: false,
+        validate: {
+          notNull: { msg: "Description must have a value" },
+          notEmpty: { msg: "Description must not be empty" },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Event",
+    }
+  );
   return Event;
 };
