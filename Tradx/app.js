@@ -20,6 +20,8 @@ app.use(
   })
 );
 
+// middleware function to check for logged-in users
+
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
